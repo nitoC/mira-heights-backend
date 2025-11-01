@@ -4,7 +4,12 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: ['http://localhost:3000', 'https://www.miraheightsng.com/'],
+    origin: [
+      'http://localhost:3000',
+      'https://www.miraheightsng.com',
+      'https://miraheightsng.com',
+    ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
   await app.listen(process.env.PORT ?? 3000);
