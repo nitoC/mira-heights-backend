@@ -35,9 +35,9 @@ export class SeederService {
     let count = await this.room.count();
 
     try {
-      // if (count > 0) {
-      //   return console.log('rooms already populated');
-      // }
+      if (count > 0) {
+        return console.log('rooms already populated');
+      }
       const res = this.room.create(rooms);
       console.log(res);
       const val = this.room.save(res);

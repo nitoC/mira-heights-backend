@@ -24,7 +24,6 @@ import { RoomTypeEntity } from './entitities/roomType.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        console.log(configService.get<string>('CONN_URI'));
         return {
           type: 'postgres',
 
