@@ -2,47 +2,42 @@ import { z } from 'zod';
 
 export class OrderDto {
   // Guest details
-  first_name: string;
-  last_name: string;
-  email?: string; // optional but common
-  phone_number?: string; // optional but useful
+  full_name: string;
+  email: string; // optional but common
+  phone?: string; // optional but useful
 
   // Booking details
-  room_id: number | string;
+  room: string;
   checkin: Date | string;
   checkout: Date | string;
-  total_days: number;
-
   // Pricing details
   amount: number; // price per night or base amount
   total_amount: number; // total after multiplying by total_days, taxes, etc.
-  currency?: string; // e.g. 'USD', 'EUR', 'INR'
+  currency?: string;
 
-  // Order / reservation status
+  // Order / reservation status 'success' | 'cancelled' | 'pending' | 'error';
   status?: 'pending' | 'confirmed' | 'cancelled' | 'checked_in' | 'checked_out';
-  payment_status?: 'unpaid' | 'paid' | 'refunded';
-  payment_method?: 'card' | 'cash';
-  //   created_at?: Date;
-  //   updated_at?: Date;
+  payment_status?: 'unpaid' | 'paid' | 'refunded' | 'processing';
+  // payment_method?: 'card' | 'cash';
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export const OrderSchema = z.object({
   // Guest details
-  first_name: z
-    .string()
-    .min(2, 'First name must be at least 2 characters long'),
-  last_name: z.string().min(2, 'Last name must be at least 2 characters long'),
+  full_name: z.string().min(2, 'First name must be at least 2 characters long'),
+  // last_name: z.string().min(2, 'Last name must be at least 2 characters long'),
   email: z.string().email('Invalid email address'),
-  mobile: z
+  phone: z
     .string()
     .min(10, 'Mobile number must be at least 10 digits')
     .max(15, 'Mobile number must not exceed 15 digits'),
 
   // Booking details
-  room_id: z.union([z.string(), z.number()]),
+  room: z.union([z.string()]),
   checkin: z.union([z.string(), z.date()]),
   checkout: z.union([z.string(), z.date()]),
-  total_days: z.number().min(1, 'Total days must be at least 1'),
+  // total_days: z.number().min(1, 'Total days must be at least 1'),
 
   // Pricing details
   amount: z.number().positive('Amount must be a positive number'),
@@ -51,14 +46,21 @@ export const OrderSchema = z.object({
 
   // Order / reservation status
   status: z
-    .enum(['pending', 'confirmed', 'cancelled', 'checked_in', 'checked_out'])
+    .enum([
+      'pending',
+      'confirmed',
+      'cancelled',
+      'checked_in',
+      'checked_out',
+      'error',
+    ])
     .optional()
     .default('pending'),
   payment_status: z
-    .enum(['unpaid', 'paid', 'refunded'])
+    .enum(['unpaid', 'paid', 'refunded', 'processing'])
     .optional()
     .default('unpaid'),
-  payment_method: z.enum(['card', 'cash']).optional(),
+  // payment_method: z.enum(['card', 'cash']).optional(),
 
   // Timestamps
   //   created_at: z.date().optional(),

@@ -10,7 +10,7 @@ import { CommonModule } from './common/common.module';
 import { SeederModule } from './seeder/seeder.module';
 import { RoomEntity } from './entitities/room.entity';
 import { CommonEntity } from './entitities/common.entity';
-import { OrderEntity } from './entitities/order.entities';
+import { OrderEntity } from './entitities/order.entity';
 import { RoomTypeEntity } from './entitities/roomType.entity';
 
 @Module({

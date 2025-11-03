@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { z } from 'zod';
-import { OrderEntity } from './order.entities';
+import { OrderEntity } from './order.entity';
 import { RoomTypeEntity } from './roomType.entity';
 
 @Entity('rooms')
