@@ -8,6 +8,7 @@ async function bootstrap() {
       'http://localhost:3000',
       'https://www.miraheightsng.com',
       'https://miraheightsng.com',
+      'https://mira-heights-t8ge-git-codex-update-topwr-d0a006-nitocs-projects.vercel.app/'
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
